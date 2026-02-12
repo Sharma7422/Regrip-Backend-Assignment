@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 
 const authRoutes = require("./routes/auth.routes");
+const taskRoutes = require("./routes/task.routes");
 
 
 
@@ -26,7 +27,7 @@ app.get("/", (req, res) => {
 
 
 app.use("/api/auth", authRoutes);
-
+app.use("/api/tasks", taskRoutes);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
