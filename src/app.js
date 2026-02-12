@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const { apiLimiter } = require("./middleware/rateLimiter");
 require("dotenv").config();
 require("./models");
 
@@ -8,7 +9,7 @@ const app = express();
 
 
 
-
+app.use(apiLimiter);
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));

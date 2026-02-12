@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { User, Activity } = require("../models");
+const logActivity = require("../utils/logActivity");
 const generateOtp = require("../utils/generateOtp");
 const sendEmail = require("../utils/sendEmail");
 
@@ -27,11 +28,7 @@ exports.sendOtp = async (req, res) => {
 
     await sendEmail(email, otp);
 
-    await Activity.create({
-      userId: user.id,
-      action: "OTP Sent",
-      ip: req.ip,
-    });
+    await logActivity(user.id, "OTP Sent", req.ip);
 
     res.json({ status: "success", message: "OTP sent successfully" });
     
@@ -51,11 +48,15 @@ exports.verifyOtp = async (req, res) => {
     if (!user)
       return res.status(400).json({ status: "failure", message: "User not found" });
 
-    if (user.otp !== otp)
+    if (user.otp !== otp) {
+      await logActivity(user.id, "Login Failed - Invalid OTP", req.ip);
       return res.status(400).json({ status: "failure", message: "Invalid OTP" });
+    }
 
-    if (new Date() > user.otpExpires)
+    if (new Date() > user.otpExpires) {
+      await logActivity(user.id, "Login Failed - OTP Expired", req.ip);
       return res.status(400).json({ status: "failure", message: "OTP expired" });
+    }
 
     const token = jwt.sign(
       { id: user.id },
@@ -63,11 +64,7 @@ exports.verifyOtp = async (req, res) => {
       { expiresIn: "15m" }
     );
 
-    await Activity.create({
-      userId: user.id,
-      action: "Login Success",
-      ip: req.ip,
-    });
+    await logActivity(user.id, "Login Success", req.ip);
 
     res.json({
       status: "success",
