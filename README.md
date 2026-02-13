@@ -4,14 +4,12 @@ A robust backend for a Task Management System built with Node.js, Express, and M
 
 ---
 
-
-##  Getting Started
+## Getting Started
 
 ### 1. Clone Repository
 
 git clone https://github.com/Sharma7422/Regrip-Backend-Assignment
 cd regrip-assignment
-
 
 ### 2. Install Dependencies
 
@@ -51,7 +49,7 @@ DB_PASS=your_mysql_password
 DB_NAME=regrip_task
 
 # JWT
-JWT_SECRET=your_jwt_secret_key_here
+JWT_SECRET=your_jwt_secret_key
 
 # Email (Gmail)
 EMAIL_USER=your_email@gmail.com
@@ -66,15 +64,13 @@ EMAIL_PASS=your_app_password_here
 npm start
 ```
 
-Server runs on: `http://localhost:5000`
+Server runs on: `https://regrip-backend-assignment-sv16.onrender.com`
 
-Swagger Docs: `http://localhost:5000/api-docs`
+Swagger Docs: `https://regrip-backend-assignment-sv16.onrender.com/api-docs`
 
 ---
 
-
-
-##  Environment Variables (.env.example)
+## Environment Variables (.env.example)
 
 ```env
 # Server Configuration
@@ -87,7 +83,7 @@ DB_PASS=your_mysql_password
 DB_NAME=regrip_task
 
 # JWT Configuration
-JWT_SECRET=your_secret_key_here_min_32_chars
+JWT_SECRET=your_secret_key
 
 # Email Configuration (Gmail)
 EMAIL_USER=your_email@gmail.com
@@ -96,27 +92,22 @@ EMAIL_PASS=your_app_password_here
 
 ---
 
+## Hosted Backend
 
-##  Hosted Backend
+- **API URL**: `https://regrip-backend-assignment-sv16.onrender.com/api`
+- **Swagger Docs**: `https://regrip-backend-assignment-sv16.onrender.com/api-docs`
 
-- **API URL**: `http://localhost:5000/api` 
-- **Swagger Docs**: `http://localhost:5000/api-docs` 
+## Quick Links
 
+GitHub Repo :- `https://github.com/yourusername/regrip-assignment`
+Live API :- `https://regrip-backend-assignment-sv16.onrender.com`
+API Docs :- `https://regrip-backend-assignment-sv16.onrender.com/api-docs`
 
-##  Quick Links
-
-
- GitHub Repo :- `https://github.com/yourusername/regrip-assignment` 
- Live API  :-  `https://your-app-name.onrender  com` 
- API Docs  :- `https://your-app-name.onrender.com/api-docs`   
-
-
-
-##  API Documentation
+## API Documentation
 
 ### Interactive Swagger UI
 
-Visit: `http://localhost:5000/api-docs`
+Visit: `https://regrip-backend-assignment-sv16.onrender.com/api-docs`
 
 ### Authentication Endpoints
 
@@ -195,11 +186,8 @@ Authorization: Bearer <token>
 ```
 
 ---
- 
 
-
-
-## 🎯 Features
+## Features
 
 - **OTP-based Authentication**: Secure email verification with 5-minute OTP expiry
 - **JWT Tokens**: 15-minute access tokens for secure API access
@@ -210,19 +198,14 @@ Authorization: Bearer <token>
 - **Global Error Handling**: Centralized error management
 - **Swagger Documentation**: Interactive API documentation at `/api-docs`
 
-
-
-##  Prerequisites
+## Prerequisites
 
 - Node.js v18+ installed
 - MySQL Server running
 - Git installed
 - Email account (Gmail recommended) with App Password
 
-
-
-
-##  Project Structure
+## Project Structure
 
 ```
 src/
@@ -236,7 +219,7 @@ src/
 ├── middleware/
 │   ├── auth.middleware.js  # JWT verification
 │   ├── errorHandler.js     # Global error handling
-│   └── rateLimiter.js      # Rate limiting 
+│   └── rateLimiter.js      # Rate limiting
 ├── models/
 │   ├── user.model.js       # User schema
 │   ├── activity.model.js   # Activity log schema
@@ -254,8 +237,7 @@ src/
 
 ---
 
-
-##  Deployment
+## Deployment
 
 ### Deploy to Render
 
@@ -288,24 +270,15 @@ EMAIL_PASS=app_password
 4. **Test Hosted API**
 
 ```bash
-curl https://your-app.onrender.com/
+curl https://regrip-backend-assignment-sv16.onrender.com
 ```
 
 ---
 
-
-
-
-
-##  Assumptions
+## Assumptions
 
 1. Users are identified only by email (no username)
 2. One active OTP per user at a time
 3. Tasks belong exclusively to users
 4. Activity logging is asynchronous (doesn't block operations)
 5. Rate limiting uses in-memory store (single server deployment)
-
-
-
-
-
