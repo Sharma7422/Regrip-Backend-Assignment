@@ -32,8 +32,15 @@ exports.sendOtp = asyncHandler(async (req, res) => {
     await user.save();
   }
 
-  await sendEmail(email, otp);
-  await logActivity(user.id, "OTP Sent", req.ip);
+  // Send email in background (don't await)
+  sendEmail(email, otp).catch(err => {
+    console.error("Failed to send email:", err.message);
+  });
+  
+  // Log activity in background
+  logActivity(user.id, "OTP Sent", req.ip).catch(err => {
+    console.error("Failed to log activity:", err.message);
+  });
 
   res.json({ status: "success", message: "OTP sent successfully" });
 });
