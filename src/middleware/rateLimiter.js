@@ -1,5 +1,13 @@
 const rateLimit = require("express-rate-limit");
 
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: {
+    message: "Too many requests from this IP.",
+  },
+  skip: (req) => req.path === "/" || req.path.includes("/api-docs"),
+});
 
 exports.otpLimiter = rateLimit({
   windowMs: 10 * 60 * 1000, 
@@ -9,7 +17,6 @@ exports.otpLimiter = rateLimit({
   },
 });
 
-
 exports.loginLimiter = rateLimit({
   windowMs: 10 * 60 * 1000,
   max: 5,
@@ -18,11 +25,4 @@ exports.loginLimiter = rateLimit({
   },
 });
 
-
-exports.apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: {
-    message: "Too many requests from this IP.",
-  },
-});
+exports.apiLimiter = apiLimiter;
